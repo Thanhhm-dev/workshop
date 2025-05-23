@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Build image HTML'
-                // sh 'docker build -t my-static-site .'
+                sh '/var/jenkins_home/build_app.sh'
             }
         }
         

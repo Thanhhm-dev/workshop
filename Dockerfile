@@ -1,13 +1,12 @@
-# Sử dụng image NGINX chính thức
 FROM nginx:alpine
 
-# Xóa cấu hình mặc định (nếu muốn)
 RUN rm -rf /usr/share/nginx/html/*
+RUN apt-get update && apt-get install python3-pip  -y 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g firebase-tools
 
-# Copy file HTML, JS vào thư mục gốc của NGINX
 COPY . /usr/share/nginx/html
 
-# Expose cổng 80 để truy cập
 EXPOSE 80
 
-# NGINX sẽ tự động chạy theo mặc định

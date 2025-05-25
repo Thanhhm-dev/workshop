@@ -12,7 +12,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy...'
-                sh 'docker exec static-site-container /usr/share/nginx/html/build_remote.sh'
+                withCredentials([string(credentialsId: 'FIREBASE_TOKEN', variable: 'FIREBASE_TOKEN')]) {
+                    sh '''
+                        docker exec static-site-container /usr/share/nginx/html/build_remote.sh "$FIREBASE_TOKEN"
+                    '''
+                }
             }
         }
     }
